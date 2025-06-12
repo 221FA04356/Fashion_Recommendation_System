@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Outfit', sans-serif;
+      background: #f0f8ff;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .invoice-container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    .invoice-container h2 {
+      margin-top: 0;
+      color: green;
+      text-align: center;
+      font-size: 1.6rem;
+    }
+    .invoice-container img {
+      display: block;
+      margin: 0 auto 20px;
+      max-width: 200px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .info-group {
+      margin-bottom: 12px;
+    }
+    .info-group label {
+      font-weight: 600;
+    }
+    .info-group span {
+      display: block;
+      margin-top: 4px;
+    }
+    .total {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: right;
+    }
+    .invoice-no {
+      font-size: 0.9rem;
+      color: #666;
+      text-align: right;
+      margin-top: 5px;
+    }
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 25px;
+      text-decoration: none;
+      color: white;
+      background: #333;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="invoice-container">
+    <h2>✅ Payment Successful!</h2>
+
+    <!-- Product Image -->
+    <img src="{{ url_for('static', filename='uploaded/' + item) }}" alt="Product Image">
+
+    <!-- Order Details -->
+    <div class="info-group">
+      <label>Invoice No:</label>
+      <span>#{{ invoice_no }}</span>
+    </div>
+    <div class="info-group">
+      <label>Item:</label>
+      <span>{{ style }}</span>
+    </div>
+    <div class="info-group">
+      <label>Size:</label>
+      <span>{{ size }}</span>
+    </div>
+    <div class="info-group">
+      <label>Quantity:</label>
+      <span>{{ quantity }}</span>
+    </div>
+    <div class="info-group">
+      <label>Unit Price:</label>
+      <span>₹{{ "%.2f"|format(unit_price) }}</span>
+    </div>
+    <div class="info-group total">
+      Total Paid: ₹{{ "%.2f"|format(total) }}
+    </div>
+
+    <!-- Customer Info -->
+    <hr>
+    <div class="info-group">
+      <label>Customer Name:</label>
+      <span>{{ name }}</span>
+    </div>
+    <div class="info-group">
+      <label>Email:</label>
+      <span>{{ email }}</span>
+    </div>
+    <div class="info-group">
+      <label>Mobile:</label>
+      <span>{{ mobile }}</span>
+    </div>
+    <div class="info-group">
+      <label>Shipping Address:</label>
+      <span>{{ address }}</span>
+    </div>
+    <div class="info-group">
+      <label>Payment Method:</label>
+      <span>{{ payment_method }}</span>
+    </div>
+
+    <a href="/" class="back-link">⬅ Continue Browsing</a>
+  </div>
+</body>
+</html>

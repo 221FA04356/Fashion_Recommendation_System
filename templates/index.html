@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fashion Recommender</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            font-family: 'Outfit', sans-serif;
+            /* Background image with overlay for readability */
+            background: 
+                linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+                url('static/uploaded/bg1.jpeg') no-repeat center/cover;
+            background-size: contain;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+        }
+        /* Container to center content and add some vertical spacing */
+        .hero {
+            text-align: center;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+        }
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.4;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+        }
+        .upload-card {
+            background: rgba(255, 255, 255, 0.9); /* light card with slight transparency */
+            /* Use dark text inside card for contrast */
+            color: #333;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            transition: all 0.3s ease-in-out;
+        }
+        .upload-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+        .upload-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .file-label {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #6c63ff;
+            color: white;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .file-label:hover {
+            background-color: #574b90;
+        }
+        #preview {
+            display: none;
+            margin-top: 30px;
+        }
+        #preview img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-top: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            animation: fadeIn 0.7s ease-in-out;
+        }
+        button.submit-btn {
+            margin-top: 30px;
+            padding: 12px 25px;
+            background-color: #ff7f50;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button.submit-btn:hover {
+            background-color: #ff5722;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Responsive tweaks */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .upload-card {
+                padding: 20px;
+            }
+            .file-label, button.submit-btn {
+                width: 100%;
+                box-sizing: border-box;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <h1>Welcome to Fashion Recommendation System</h1>
+        <p>A user-friendly platform where you can customise and choose items that best match your interests and choices, perfect for every season.</p>
+    </div>
+
+    <div class="upload-card">
+        <h2>Upload Your Fashion Style</h2>
+        <form action="/recommend" method="post" enctype="multipart/form-data">
+            <label class="file-label">
+                <input type="file" name="file" id="fileInput" accept="image/*" required>
+                Choose Fashion Image
+            </label>
+            <div id="preview">
+                <img id="previewImage" src="#" alt="Image Preview">
+            </div>
+            <button type="submit" class="submit-btn">✨ Get Recommendations</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+        const previewImage = document.getElementById('previewImage');
+
+        fileInput.onchange = () => {
+            const file = fileInput.files[0];
+            if (file) {
+                previewImage.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>
